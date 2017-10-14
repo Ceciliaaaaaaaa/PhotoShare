@@ -68,7 +68,8 @@ def request_loader(request):
     user = User()
     user.id = email
     cursor = mysql.connect().cursor()
-    cursor.execute("SELECT password FROM Users WHERE email = '{0}'".format(email))
+
+    cursor.execute("SELECT password FROM Users WHERE email = email")
     data = cursor.fetchall()
     pwd = str(data[0][0])
     user.is_authenticated = request.form['password'] == pwd
